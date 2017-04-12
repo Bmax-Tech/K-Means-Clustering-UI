@@ -1,0 +1,25 @@
+{
+  "name": "K-Means Clustering UI",
+  "homepage": "https://github.com/Bmax-Tech/K-Means-Clustering-UI",
+  "authors": [
+    "Buwaneka Boralessa <buwanekab@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "bootstrap": "3.3.7",
+    "font-awesome": "font-awsome#^4.7.0",
+    "Ionicons": "ionicons#^2.0.1",
+    "d3": "^4.7.4"
+  }
+}

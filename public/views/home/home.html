@@ -1,0 +1,31 @@
+<div class="col-lg-12" ng-controller="HomeController" ng-init="__init__()">
+    <h2>Training Data Set</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Channel</th>
+            <th>Region</th>
+            <th>Fresh</th>
+            <th>Milk</th>
+            <th>Grocery</th>
+            <th>Frozen</th>
+            <th>Detergents Paper</th>
+            <th>Delicatessen</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="data in dataset">
+            <td>{{$index+1}}</td>
+            <td>{{data.Channel}}</td>
+            <td>{{data.Region}}</td>
+            <td>{{data.Fresh}}</td>
+            <td>{{data.Milk}}</td>
+            <td>{{data.Grocery}}</td>
+            <td>{{data.Frozen}}</td>
+            <td>{{data.Detergents_Paper}}</td>
+            <td>{{data.Delicassen}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
