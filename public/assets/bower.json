@@ -20,6 +20,8 @@
     "bootstrap": "3.3.7",
     "font-awesome": "font-awsome#^4.7.0",
     "Ionicons": "ionicons#^2.0.1",
-    "d3": "^4.7.4"
+    "d3": "^4.7.4",
+    "nvd3": "^1.8.5",
+    "angular-nvd3": "^1.0.9"
   }
 }

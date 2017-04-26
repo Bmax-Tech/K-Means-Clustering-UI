@@ -2,7 +2,8 @@
  * Created by buwan on 4/12/2017.
  */
 var app = angular.module('k-means', [
-    'ngRoute'
+    'ngRoute',
+    'nvd3'
 ]);
 
 // main REST end point
