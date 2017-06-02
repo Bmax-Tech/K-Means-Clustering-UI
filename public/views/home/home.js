@@ -17,6 +17,9 @@ app.controller('HomeController', function HomeController($scope, $http) {
     }, {
         id: 4,
         label: "Four cluster"
+    }, {
+        id: 5,
+        label: "Five cluster"
     }];
     $scope.selected = $scope.items[0];
 
@@ -79,43 +82,40 @@ app.controller('HomeController', function HomeController($scope, $http) {
                 horizontalOff: false,
                 verticalOff: false,
                 unzoomEventType: 'dblclick.zoom'
+            },
+            tooltip: {
+                contentGenerator: function (d) {
+                    return '<div><p class="tooltip-title-1">#' + d.point.item_no + '</p>' +
+                        '<p class="tooltip-title-2">cluster : ' + (d.point.cluster + 1) + '</p>' +
+                        '<p>(' + d.point.x.toFixed(2) + ', ' + d.point.y.toFixed(2) + ')</p></div>';
+                }
             }
         }
     };
 
     function generateData(data_set) {
-        var data = {}, chart_data = [],
-            shapes = ['circle', 'triangle-up'];
+        var chart_data = [], shapes = ['circle', 'triangle-up'];
 
-        // get clusters
-        for (var i = 0; i < data_set.sample_preds.length; i++) {
-            if (data[data_set.sample_preds[i]] == undefined) {
-                data[data_set.sample_preds[i]] = [];
-            }
-            data[data_set.sample_preds[i]].push(i);
-        }
-
-        // assign values
-        var main_count = 0;
-        var count = 0;
-        angular.forEach(data, function (value, key) {
+        for (var i = 1; i <= data_set.center_points.length; i++) {
             chart_data.push({
-                key: 'Cluster ' + (parseInt(key) + 1),
+                key: 'Cluster ' + i,
                 values: []
             });
-            for (var i = 0; i < value.length; i++) {
-                chart_data[main_count].values.push({
-                    x: data_set.data_points[i].x,
-                    y: data_set.data_points[i].y,
-                    size: 5,
-                    shape: shapes[main_count]
-                });
-                count++;
-            }
-            main_count++;
-        });
+        }
+        var count = 0;
+        for (var i = 0; i < data_set.data_points.length; i++) {
+            chart_data[data_set.data_points[i].cluster].values.push({
+                item_no: data_set.data_points[i].item_no,
+                cluster: data_set.data_points[i].cluster,
+                x: data_set.data_points[i].x,
+                y: data_set.data_points[i].y,
+                size: 5,
+                shape: shapes[data_set.data_points[i].cluster]
+            });
+            count++;
+        }
+
         $scope.total_count = count;
-        //console.log(chart_data);
         return chart_data;
     }
 });

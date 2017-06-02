@@ -7,4 +7,4 @@ var app = angular.module('k-means', [
 ]);
 
 // main REST end point
-var BASE_URL = 'http://127.0.0.1:7890';
+var BASE_URL = 'http://127.0.0.1:7891';
