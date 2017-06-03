@@ -6,9 +6,6 @@ app.controller('HomeController', function HomeController($scope, $http) {
     $scope.total_count = 0;
     $scope.loading = false;
     $scope.items = [{
-        id: 1,
-        label: "One cluster"
-    }, {
         id: 2,
         label: "Two cluster"
     }, {
@@ -22,6 +19,16 @@ app.controller('HomeController', function HomeController($scope, $http) {
         label: "Five cluster"
     }];
     $scope.selected = $scope.items[0];
+    $scope.form = {
+        fresh: 0,
+        milk: 0,
+        grocery: 0,
+        frozen: 0,
+        detergent: 0,
+        delicatessen: 0
+    };
+    $scope.filter_items = [];
+    $scope.finding = false;
 
     $scope.__init__ = function () {
         // getData();
@@ -43,7 +50,6 @@ app.controller('HomeController', function HomeController($scope, $http) {
             $scope.dataset = angular.copy(res.data);
             $scope.data = generateData(res.data);
             $scope.loading = false;
-            // $scope.$apply();
         }, function errorCallback(response) {
             console.error(response);
         });
@@ -94,7 +100,7 @@ app.controller('HomeController', function HomeController($scope, $http) {
     };
 
     function generateData(data_set) {
-        var chart_data = [], shapes = ['circle', 'triangle-up'];
+        var chart_data = [], shapes = ['circle', 'circle', 'circle', 'circle', 'circle'];
 
         for (var i = 1; i <= data_set.center_points.length; i++) {
             chart_data.push({
@@ -117,5 +123,29 @@ app.controller('HomeController', function HomeController($scope, $http) {
 
         $scope.total_count = count;
         return chart_data;
+    }
+
+    $scope.add = function () {
+        $scope.finding = true;
+        var temp = angular.copy($scope.form);
+        // var temp_arr = [];
+        // temp_arr.push(temp);
+        $http({
+            method: 'POST',
+            url: BASE_URL + '/getCluster',
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                type: $scope.selected,
+                customers: [temp]
+            }
+        }).then(function (res) {
+            $scope.finding = false;
+            console.log(res);
+            temp['cluster'] = res.data.cluster;
+            $scope.filter_items.push(temp);
+        }, function errorCallback(response) {
+            $scope.finding = false;
+            console.error(response);
+        });
     }
 });
