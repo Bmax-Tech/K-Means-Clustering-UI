@@ -28,5 +28,5 @@ console.log("App listening on port 4400");
 // ---------------------------------------------------------------------------------------------------------------------
 
 app.get('*', function (req, res) {
-    res.sendfile('./public/index.html');
+    res.sendfile(__dirname + '/public/index.html');
 });
